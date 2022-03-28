@@ -1,29 +1,10 @@
 const { MessageEmbed, MessageActionRow, MessageButton} = require('discord.js');
 const fetch = require("node-fetch");
+const memer = require("../common/meme.js")
+const memebtns = require("../common/memebtns.js")
 async function run(inter) {
-  await fetch("https://meme-api.herokuapp.com/gimme").then(async (meme)=>{return await meme.json()}).then(async (meme)=>{
-    const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomId('next_meme')
-					.setLabel('Next Meme')
-          .setEmoji('➡️')
-          .setDisabled(true)
-					.setStyle('SECONDARY'),
-        new MessageButton()
-          .setCustomId("end_meme_interaction")
-          .setLabel("End Interaction")
-          .setEmoji("🛑")
-          .setDisabled(true)
-          .setStyle("DANGER"),
-        new MessageButton()
-          .setStyle("LINK")
-          .setLabel("View Post")
-          .setURL(meme.postLink)
-        .setDisabled(true)
-			);
-    //console.log(inter)
-    await inter.update({embeds:inter.message.embeds,components:[row]})
+  memer.generate().then(async (meme)=>{
+    await inter.update({embeds:inter.message.embeds,components:[memebtns.generate(meme,"btn_end_inter")]})
   })
 }
 

@@ -3,7 +3,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const beeptools = require("beeptools")
 beeptools.KeepAlive()
 client.on('ready', async () => {
-  client.user.setActivity('funny memes', { type: 'WATCHING' });
+  client.user.setActivity('funny memes | '+client.guilds.cache.size+" servers", { type: 'WATCHING' });
     client.guilds.cache.forEach(guild => {
       guild.commands.cache.forEach(command=>{
         guild.commands.delete(command.id)
