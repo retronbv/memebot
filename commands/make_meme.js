@@ -60,7 +60,7 @@ const data = new SlashCommandBuilder()
 			.addChoice('Types of Headaches', 'headaches')
       .addChoice('Zero Wing', 'zero-wing')
       .addChoice('Ugandan Knuckles (2)', "ugandanknuck")
-      .addChouce("Afraid to Ask Andy (2)","afraid")
+      .addChouce("Afraid to Ask Andy (2)","afraid"))
   .addStringOption(option=>
     option.setName("text")
       .setDescription("The meme text (will be top if there is 2 text spaces)")
