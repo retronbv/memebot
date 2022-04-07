@@ -7,6 +7,7 @@ function membed(inter,meme) {
   	.setDescription(`Meme from ${meme.author}`)
     .setFooter({text:`#${inter.channel.name}`})
   	.setTimestamp()
+  //msg = {content:"",embed}
   return exampleEmbed
 }
 module.exports = {

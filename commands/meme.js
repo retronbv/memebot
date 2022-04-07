@@ -1,16 +1,22 @@
 const { Builders } = require("beeptools")
 const { MessageEmbed, MessageActionRow, MessageButton} = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const memer = require("../common/meme.js");
 const memebtns = require("../common/memebtns.js");
 const membeds = require("../common/membeds.js");
+const memer = require("../common/meme.js");
 const fetch = require("node-fetch");
 async function help(inter) {
-  
-  memer.generate().then(async (meme)=>{
-    await inter.reply({embeds:[membeds.generate(inter,meme)],components:[memebtns.generate(meme,"slsh_cmd")]})
-  })
-    //console.log(meme)
+  await inter.deferReply();
+  while (true) {
+    meme = await memer.generate()
+    if (meme.nsfw === false) {
+      msg = {embeds:[membeds.generate(inter,meme)],components:[memebtns.generate(meme,"slsh_cmd")]}
+      await inter.editReply(msg);
+      break;
+    } else {
+      console.log("boi nsfw "+meme.nsfw)
+    }
+  }
 }
 
 const data = new SlashCommandBuilder()

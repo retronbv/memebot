@@ -4,10 +4,16 @@ const memer = require("../common/meme.js")
 const memebtns = require("../common/memebtns.js")
 const membeds = require("../common/membeds.js")
 async function run(inter) {
-  memer.generate().then(async (meme)=>{
-    //console.log(meme)
-    await inter.update({embeds:[membeds.generate(inter,meme)],components:[memebtns.generate(meme,"btn_nxt_meme")]})
-  })
+  while (true) {
+    meme = await memer.generate()
+    if (meme.nsfw === false) {
+      msg = {embeds:[membeds.generate(inter,meme)],components:[memebtns.generate(meme,"btn_nxt_meme")]}
+      await inter.update(msg);
+      break;
+    } else {
+      console.log("boi nsfw "+meme.nsfw)
+    }
+  }
 }
 
 command = run

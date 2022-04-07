@@ -26,13 +26,16 @@ client.on("guildCreate", guild => {
   client.guilds.cache.forEach(guild => {
     beeptools.RegisterSlash(process.env.TOKEN, guild.id, client.application.id, __dirname + "/commands")
   });
+  client.user.setActivity('funny memes | '+client.guilds.cache.size+" servers", { type: 'WATCHING' });
 });
 
 client.on('interactionCreate', async interaction => {
   if (interaction.isCommand()) {
+    /*
     client.guilds.cache.forEach(guild => {
       beeptools.RegisterSlash(process.env.TOKEN, guild.id, client.application.id, __dirname + "/commands")
     });
+    */
   }
 
   if (interaction.isButton()) {
@@ -44,5 +47,5 @@ client.on('interactionCreate', async interaction => {
     cmd(interaction);
   };
 });
-
-client.login(process.env.TOKEN)
+//client.on("error",console.log).on("warn",console.log).on("debug",console.log)
+client.login(process.env.TOKEN).catch(console.error)

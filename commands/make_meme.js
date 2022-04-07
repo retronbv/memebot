@@ -9,12 +9,13 @@ function encodeTEXT(text) {
   return encodeURI(text.replace("?","~q").replace("&","~a").replace("%","~p").replace("#","~h").replace("/","~s").replace("\\","~b").replace("<","~l").replace(">","~g").replace("\"","''"))
 }
 async function help(inter) {
+  await inter.deferReply()
   // https://api.memegen.link/images/ugandanknuck/~hspecial_characters~q/underscore__-dash--.png
   const ymlUrl = "https://api.memegen.link/templates/"+inter.options.getString('template')
   fetch(ymlUrl).then((yml)=>{return yml.json()}).then(async(json)=>{
     if (json["lines"]==2) {
       if (inter.options.getString("text_bottom")==null) {
-        inter.reply({content:"Put bottom text if you are gonna use a 2 textbox meme",ephemeral:true})
+        inter.editReply({content:"Put bottom text if you are gonna use a 2 textbox meme",ephemeral:true})
         return;
         
       }
@@ -26,7 +27,7 @@ async function help(inter) {
       	.setDescription(`Meme from ${inter.user.tag}`)
         .setFooter({text:`#${inter.channel.name}`})
       	.setTimestamp()
-      await inter.reply({embeds:[exampleEmbed]})
+      await inter.editReply({embeds:[exampleEmbed]})
     } else if (json["lines"]==1) {
       let memeurl = `https://api.memegen.link/images/${inter.options.getString('template')}/${encodeTEXT(inter.options.getString("text"))}.png`
       const exampleEmbed = new MessageEmbed()
@@ -36,7 +37,7 @@ async function help(inter) {
       	.setDescription(`Meme from ${inter.user.tag}`)
         .setFooter({text:`#${inter.channel.name}`})
       	.setTimestamp()
-      await inter.reply({embeds:[exampleEmbed]})
+      await inter.editReply({embeds:[exampleEmbed]})
     }
   })
   

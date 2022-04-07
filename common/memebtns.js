@@ -19,7 +19,7 @@ function membed(meme,inter) {
         new MessageButton()
           .setStyle("LINK")
           .setLabel("View Post")
-          .setDisabled(true)
+          .setDisabled(false)
           .setURL(meme.postLink)
 			);
       break;
